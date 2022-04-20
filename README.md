@@ -1,5 +1,5 @@
 # esx-duty
-#Very Simple On/Off duty system for police officers
+# Very Simple On/Off duty system for police officers
 
  # Features
 * Go On/Off Duty
