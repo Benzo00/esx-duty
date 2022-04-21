@@ -56,7 +56,8 @@ CreateThread(function()
           if dist <= Config.Utils.DrawDistance and ESX.PlayerData.job and ESX.PlayerData.job.name  == Config.Job or ESX.PlayerData.job and ESX.PlayerData.job.name == Config.OffDuty then 
               sleep = false
               DrawMarker(20, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 187, 255, 0, 255, false, true, 2, nil, nil, false)
-
+              ESX.ShowHelpNotification(Config.Trans.Press)
+					
               if IsControlJustReleased(0, Config.Key) then
                   TriggerEvent("Duty:Menu")
               end
