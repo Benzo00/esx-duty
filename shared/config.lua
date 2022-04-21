@@ -19,7 +19,7 @@ Config.Webhook = {
   }
 
 Config.Trans = {
-    Press = "Press [E] to Open The Duty Menu",
+    Press = "Press ~INPUT_CONTEXT~ to Open The Duty Menu",
     OnDuty = "Welcome Back",
     OffDuty = "You went Off-Duty",
     AlreadyOffDuty = "Your Already Off-Duty",
