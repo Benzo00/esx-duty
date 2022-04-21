@@ -43,8 +43,8 @@ function Discord(source,  reason, color)
       PerformHttpRequest(Config.Webhook.Webhook, function(err,  text, headers) end, 'POST', json.encode({" [" .. source .. "]",  embeds = connect, content = message, avatar_url = image, tts = false}), { ['Content-Type'] = 'application/json' })
 end
 
-AddEventHandler('onResourceStart', function(duuty)
-    if (GetCurrentResourceName() ~= duuty) then
+AddEventHandler('onResourceStart', function(resourceName)
+    if (GetCurrentResourceName() ~= 'esx-duty') then
       return
     end
 
@@ -61,6 +61,8 @@ AddEventHandler('onResourceStart', function(duuty)
         print("-----------------------------------------------------------------------------")
 
   end)
+ 
+ 
  
  
 
