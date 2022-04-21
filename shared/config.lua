@@ -5,7 +5,6 @@ Config = {
     QTarget = false ---- Enable this if ur using Qtarget
 }
 
-
 Config.Utils = {
     Marker = vector3(439.26, -981.67, 30.67),
     DrawDistance = 2.5,
@@ -16,16 +15,12 @@ Config.Webhook = {
     Title = "Duty System",
     Color = 0191102, --- Green 
     Date = '%x %X %p' 
-  }
+}
 
 Config.Trans = {
     Press = "Press ~INPUT_CONTEXT~ to Open The Duty Menu",
     OnDuty = "Welcome Back",
     OffDuty = "You went Off-Duty",
-    AlreadyOffDuty = "Your Already Off-Duty",
-    AlreadyOnDuty = "You are already On-Duty",
+    AlreadyOffDuty = "You're Already Off-Duty",
+    AlreadyOnDuty = "You're Already On-Duty",
 }
-
-
-
-
