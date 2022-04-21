@@ -18,9 +18,10 @@ RegisterNetEvent("Off-Duty")
 AddEventHandler("Off-Duty", function()
     local xPlayer = ESX.GetPlayerFromId(source)
     local job = xPlayer.job.name
+    local grade = xPlayer.job.grade
     local reason = "Went Off-Duty" --- For the Webhook
     if job == Config.Job then
-        xPlayer.setJob(Config.OffDuty, 0)
+        xPlayer.setJob(Config.OffDuty, grade)
         TriggerClientEvent("notification", source, Config.Trans.OffDuty)
         Discord(source,  reason)
     else
