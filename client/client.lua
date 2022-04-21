@@ -4,6 +4,24 @@
 --██╔══╝  ╚════██║ ██╔██╗     ██║  ██║██║   ██║   ██║     ╚██╔╝  
 --███████╗███████║██╔╝ ██╗    ██████╔╝╚██████╔╝   ██║      ██║   
 --╚══════╝╚══════╝╚═╝  ╚═╝    ╚═════╝  ╚═════╝    ╚═╝      ╚═╝  
+
+RegisterNetEvent('esx:playerLoaded')
+AddEventHandler('esx:playerLoaded', function(xPlayer)
+ 	ESX.PlayerData = xPlayer
+	 ESX.PlayerLoaded = true
+end)
+
+RegisterNetEvent('esx:onPlayerLogout')
+AddEventHandler('esx:onPlayerLogout', function()
+	  ESX.PlayerLoaded = false
+	  ESX.PlayerData = {}
+end)
+
+RegisterNetEvent('esx:setJob')
+AddEventHandler('esx:setJob', function(job)
+    ESX.PlayerData.job = job
+end)
+
 local target = {}
 table.insert(target, {
   event = "Duty:Menu",
@@ -35,15 +53,14 @@ CreateThread(function()
       else
           local playerCoords = GetEntityCoords(PlayerPedId(), false)
           local dist = Vdist(playerCoords.x, playerCoords.y, playerCoords.z, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z)
-
-          if dist <= Config.Utils.DrawDistance and ESX.PlayerData.job.name == Config.Job or  ESX.PlayerData.job.name == Config.OffDuty   then
+          if dist <= Config.Utils.DrawDistance and ESX.PlayerData.job and ESX.PlayerData.job.name  == Config.Job or ESX.PlayerData.job and ESX.PlayerData.job.name == Config.OffDuty then 
               sleep = false
               DrawMarker(20, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 187, 255, 0, 255, false, true, 2, nil, nil, false)
 
               if IsControlJustReleased(0, Config.Key) then
                   TriggerEvent("Duty:Menu")
               end
-          end
+          end   
       end
       if sleep then
         Wait(500)
