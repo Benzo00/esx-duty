@@ -2,7 +2,7 @@ Config = {
     Job = "police", --- Database name for police
     OffDuty = "off-duty", --- Database name for off-duty
     Key = 38, ---- E
-    QTarget = trye ---- Enable this if ur using Qtarget
+    QTarget = false ---- Enable this if ur using Qtarget
 }
 
 
