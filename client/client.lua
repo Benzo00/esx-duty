@@ -22,46 +22,39 @@ AddEventHandler('esx:setJob', function(job)
     ESX.PlayerData.job = job
 end)
 
-local target = {}
-table.insert(target, {
-  event = "Duty:Menu",
-  icon = "fas fa-box-circle-check",
-  label = "Open Duty Menu",
-  job = {["police"] = 0, ["off-duty"] = 0}
-})                                                       
-                  
-
 
 
 
 
 
 CreateThread(function()
-    while true do 
-      local sleep = 500
-      
-      if Config.QTarget == true then
-          exports.qtarget:AddTargetModel({1573132612}, {
-          options = target, distance = 2.5})
-      else
-          local playerCoords = GetEntityCoords(PlayerPedId(), false)
-          local dist = Vdist(playerCoords.x, playerCoords.y, playerCoords.z, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z)
-          if dist <= Config.Utils.DrawDistance then
-           if ESX.PlayerData.job and ESX.PlayerData.job.name  == Config.Job or ESX.PlayerData.job and ESX.PlayerData.job.name == Config.OffDuty then 
-            sleep = 0
-              ESX.TextUI(Config.Trans.Press)
-              DrawMarker(20, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 187, 255, 0, 255, false, true, 2, nil, nil, false)
-              if IsControlJustReleased(0, Config.Key) then
-                  TriggerEvent("Duty:Menu")
-              end
-            end   
-            else
-                ESX.HideUI()
-        end
+  while true do 
+    local sleep = 500
+    
+    if Config.QTarget == true then
+      exports.qtarget:AddBoxZone("Benzo-Duty", vector3(441.1, -980.16, 30.69), 1.5, 1.5, {
+      name="Benzo-Duty", heading=0,debugPoly=false,minZ=30.77834,maxZ=35.87834,
+      job = {["police"] = 0, ["off-duty"] = 0},}, {options = {{event = "Duty:Menu", icon = "fas fa-box-circle-check", label = "Open Duty Menu", },},distance = 2.5})
+    else
+        local playerCoords = GetEntityCoords(PlayerPedId(), false)
+        local dist = Vdist(playerCoords.x, playerCoords.y, playerCoords.z, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z)
+        if dist <= Config.Utils.DrawDistance then
+         if ESX.PlayerData.job and ESX.PlayerData.job.name  == Config.Job or ESX.PlayerData.job and ESX.PlayerData.job.name == Config.OffDuty then 
+          sleep = 0
+            ESX.TextUI(Config.Trans.Press)
+            DrawMarker(20, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 187, 255, 0, 255, false, true, 2, nil, nil, false)
+            if IsControlJustReleased(0, Config.Key) then
+                TriggerEvent("Duty:Menu")
+            end
+          end   
+          else
+              ESX.HideUI()
       end
-      Wait(sleep)
     end
+    Wait(sleep)
+  end
 end)
+
 
 
 
