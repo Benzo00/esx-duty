@@ -1,16 +1,20 @@
+local Webhook = "" --- Add your webhook here
+
+
 RegisterNetEvent("On-Duty")
 AddEventHandler("On-Duty", function()
     local xPlayer = ESX.GetPlayerFromId(source)
     local job = xPlayer.job.name
     local grade = xPlayer.job.grade
     local reason = "Went On-Duty" --- For the Webhook
-
-    if job == Config.OffDuty then
-        xPlayer.setJob(Config.Job, grade)
+    for k,v in pairs(Config.Zones) do
+    if job == v.OffDuty then
+        xPlayer.setJob(v.Job, grade)
         TriggerClientEvent("esx:showNotification", source, Config.Trans.OnDuty, "success")
         Discord(source,  reason)
     else
         TriggerClientEvent("esx:showNotification", source, Config.Trans.AlreadyOnDuty, "error")
+    end
     end
 end)
 
@@ -20,12 +24,14 @@ AddEventHandler("Off-Duty", function()
     local job = xPlayer.job.name
     local grade = xPlayer.job.grade
     local reason = "Went Off-Duty" --- For the Webhook
-    if job == Config.Job then
-        xPlayer.setJob(Config.OffDuty, grade)
+    for k,v in pairs(Config.Zones) do
+    if job == v.Job then
+        xPlayer.setJob(v.OffDuty, grade)
         TriggerClientEvent("esx:showNotification", source, Config.Trans.OffDuty, "success")
         Discord(source,  reason)
     else
         TriggerClientEvent("esx:showNotification", source, Config.Trans.AlreadyOffDuty, "error")
+    end
     end
 end)
 
@@ -34,14 +40,14 @@ function Discord(source,  reason, color)
     local xPlayer = ESX.GetPlayerFromId(source)
     local connect = {
           {
-              ["color"] = Config.Webhook.Color,
-              ["title"] = Config.Webhook.Title,
-              ["description"] = "```Name:" .. xPlayer.getName() .. "``` ```" .. reason .. " ``````Date: " .. os.date(Config.Webhook.Date) .. "```" ,
+              ["color"] = 0191102,
+              ["title"] = "Duty System",
+              ["description"] = "```Name:" .. xPlayer.getName() .. "``` ```" .. reason .. " ``````Date: " .. os.date('%x %X %p') .. "```" ,
               ["footer"] = {
               },
           }
       }
-      PerformHttpRequest(Config.Webhook.Webhook, function(err,  text, headers) end, 'POST', json.encode({" [" .. source .. "]",  embeds = connect, content = message, avatar_url = image, tts = false}), { ['Content-Type'] = 'application/json' })
+      PerformHttpRequest(Webhook, function(err,  text, headers) end, 'POST', json.encode({" [" .. source .. "]",  embeds = connect, content = message, avatar_url = image, tts = false}), { ['Content-Type'] = 'application/json' })
 end
 
 AddEventHandler('onResourceStart', function(resourceName)

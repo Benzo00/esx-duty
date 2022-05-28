@@ -30,6 +30,7 @@ end)
 CreateThread(function()
   while true do 
     local sleep = 500
+    for k,v in pairs(Config.Zones) do
     
     if Config.QTarget == true then
       exports.qtarget:AddBoxZone("Benzo-Duty", vector3(441.1, -980.16, 30.69), 1.5, 1.5, {
@@ -37,12 +38,12 @@ CreateThread(function()
       job = {["police"] = 0, ["off-duty"] = 0},}, {options = {{event = "Duty:Menu", icon = "fas fa-box-circle-check", label = "Open Duty Menu", },},distance = 2.5})
     else
         local playerCoords = GetEntityCoords(PlayerPedId(), false)
-        local dist = Vdist(playerCoords.x, playerCoords.y, playerCoords.z, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z)
-        if dist <= Config.Utils.DrawDistance then
-         if ESX.PlayerData.job and ESX.PlayerData.job.name  == Config.Job or ESX.PlayerData.job and ESX.PlayerData.job.name == Config.OffDuty then 
+        local dist = #(playerCoords - v.Pos)
+        if dist <= v.DrawDistance then
+         if ESX.PlayerData.job and ESX.PlayerData.job.name  == v.Job or ESX.PlayerData.job and ESX.PlayerData.job.name == v.OffDuty then 
           sleep = 0
             ESX.TextUI(Config.Trans.Press)
-            DrawMarker(20, Config.Utils.Marker.x, Config.Utils.Marker.y, Config.Utils.Marker.z,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 187, 255, 0, 255, false, true, 2, nil, nil, false)
+            DrawMarker(20, v.Pos ,0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.3, 0.2, 0.2, 187, 255, 0, 255, false, true, 2, nil, nil, false)
             if IsControlJustReleased(0, Config.Key) then
                 TriggerEvent("Duty:Menu")
             end
@@ -50,6 +51,7 @@ CreateThread(function()
           else
               ESX.HideUI()
       end
+    end
     end
     Wait(sleep)
   end

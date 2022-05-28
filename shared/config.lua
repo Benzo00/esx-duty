@@ -1,22 +1,27 @@
 Config = {
-    Job = "police", --- Database name for police
-    OffDuty = "off-duty", --- Database name for off-duty
     Key = 38, ---- E
     QTarget = false ---- Enable this if ur using Qtarget
 }
 
 
-Config.Utils = {
-    Marker = vector3(439.26, -981.67, 30.67),
-    DrawDistance = 2.5,
+
+
+Config.Zones = {
+    Police = {
+       Job = "police",
+       OffDuty = "off-duty", --- Database name for off-duty
+       Pos = vector3(439.26, -981.67, 30.67),
+       DrawDistance = 2.5,
+    },
+    Ambulance = {
+        Job = "ambulance",
+        OffDuty = "off-duty", --- Database name for off-duty
+        Pos = vector3(297.40, -581.72, 43.0), -- change this to your hospital
+        DrawDistance = 2.5,
+    }
 }
 
-Config.Webhook = {
-    Webhook = "",
-    Title = "Duty System",
-    Color = 0191102, --- Green 
-    Date = '%x %X %p' 
-  }
+
 
 Config.Trans = {
     Press = "Press [E] to Open The Duty Menu",
