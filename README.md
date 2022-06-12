@@ -19,4 +19,3 @@
 
  # Preview
  * Menu https://cdn.discordapp.com/attachments/960182858880778282/966076420889640970/unknown.png
-* Notification https://cdn.discordapp.com/attachments/960182858880778282/966076464355217518/unknown.png
